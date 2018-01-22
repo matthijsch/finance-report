@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the JMT catalog package.
+ *
+ * (c) Connect Holland.
+ */
+
 namespace App\Repository;
 
 use App\Entity\Bankaccount;

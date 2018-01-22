@@ -7,3 +7,7 @@ app_dashboard:
 app_bankaccounts_index:
     path: /bankaccounts
     controller: App\Controller\BankaccountController::overviewAction
+
+app_bankaccounts_update:
+    path: /bankaccounts/{id}/update
+    controller: App\Controller\BankaccountController::updateAction

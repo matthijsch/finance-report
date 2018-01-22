@@ -1,0 +1,16 @@
+.collection {
+    max-width: 500px;
+}
+
+.collection-item {
+    position: relative;
+
+    &.editable {
+        @include icon(edit) {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            margin-top: -12px;
+        }
+    }
+}

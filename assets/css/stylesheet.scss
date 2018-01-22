@@ -6,7 +6,10 @@
 @import 'base/global';
 @import 'base/typography';
 
+@import 'layout/body';
 @import 'layout/container';
+
+@import 'components/collection';
 
 @import 'components/navigation/sidebar';
 
