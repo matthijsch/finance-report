@@ -1,3 +1,9 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app_dashboard:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: pages/dashboard.html.twig
+
+app_bankaccounts_index:
+    path: /bankaccounts
+    controller: App\Controller\BankaccountController::overviewAction

@@ -1,0 +1,19 @@
+App\Entity\Mutation:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        amount:
+            type: integer
+            length: 11
+        date:
+            type: datetime
+    manyToOne:
+        bankaccount:
+            targetEntity: App\Entity\Bankaccount
+            cascade: ["persist"]
+            joinColumn:
+                name: bankaccount_id
+                referencedColumnName: id

@@ -1,0 +1,17 @@
+App\Entity\Bankaccount:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        company:
+            type: string
+            length: 100
+        accountNumber:
+            type: string
+            length: 100
+            column: account_number
+        category:
+            type: string
+            length: 100

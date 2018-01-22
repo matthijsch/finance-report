@@ -1,0 +1,51 @@
+{
+    "default_tasks": [
+        "sass",
+        "javascript"
+    ],
+    "production": true,
+    "sass": {
+        "linting": {
+            "enabled": false
+        },
+        "src": [
+            "assets/css/**/*.scss"
+        ],
+        "dest": "public/assets/css",
+        "watch": ["assets/css/**/*.scss"],
+        "includePaths": [
+            "node_modules/normalize.css",
+            "node_modules/connectholland-sass-mixins",
+            "node_modules/materialize-css/sass"
+        ],
+        "autoprefix": ["last 2 versions", "IE >= 9"]
+    },
+    "javascript": {
+        "items": [
+            {
+                "src": [
+                    "node_modules/jquery/dist/jquery.min.js"
+                ],
+                "dest": "public/js",
+                "outputname": "head.min.js"
+            },
+            {
+                "src": [
+                    "assets/js/components/*.js",
+                    "assets/js/*.js"
+                ],
+                "dest": "public/js",
+                "outputname": "body.min.js"
+            }
+        ],
+        "watch": ["assets/js/**/*.js"]
+    },
+    "icons": {
+        "src": [
+            "assets/icons/*.svg"
+        ],
+        "dest": "public/assets/font/",
+        "generatedScss": "assets/css/generated/",
+        "webpath": "/assets/font/"
+    }
+}

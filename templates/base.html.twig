@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Finance report!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/css/stylesheet.css') }}"  />
+        {% endblock %}
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700,900" rel="stylesheet">
+    </head>
+    <body>
+        {% block body %}
+            <div class="page-container">
+                {% include 'layout/sidebar.html.twig' %}
+                <main class="page-body">
+                    {% block content %}{% endblock %}
+                </main>
+            </div>
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

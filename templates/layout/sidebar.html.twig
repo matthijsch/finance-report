@@ -1,0 +1,17 @@
+<div class="sidebar">
+    <div class="logo">
+        Finance Report.
+    </div>
+
+    <ul class="sidebar-navigation">
+        <li class="home{% if app.request.get('_route') == 'app_dashboard' %} active{% endif %}">
+            <a href="{{ path('app_dashboard') }}"><span>Home</span></a>
+        </li>
+        <li class="charts">
+            <a href="#"><span>Charts</span></a>
+        </li>
+        <li class="edit{% if app.request.get('_route') == 'app_bankaccounts_index' %} active{% endif %}">
+            <a href="{{ path('app_bankaccounts_index') }}"><span>Edit bankaccounts</span></a>
+        </li>
+    </ul>
+</div>

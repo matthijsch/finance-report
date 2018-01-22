@@ -1,0 +1,57 @@
+@charset 'utf-8';
+
+$version: '68064';
+
+@font-face {
+    font-family: 'icon';
+    src: url('/assets/font/icon.eot?v#{$version}');
+    src: url('/assets/font/icon.eot?v#{$version}#iefix') format('eot'),
+        url('/assets/font/icon.woff2?v#{$version}') format('woff2'),
+        url('/assets/font/icon.woff?v#{$version}') format('woff'),
+        url('/assets/font/icon.ttf?v#{$version}') format('truetype'),
+        url('/assets/font/icon.svg?v#{$version}#icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$icon-charts: 'charts' '\EA01';
+$icon-edit: 'edit' '\EA02';
+$icon-home: 'home' '\EA03';
+
+
+$icon: $icon-charts $icon-edit $icon-home;
+
+@mixin icon($name) {
+    &::before {
+        @include icon-style($name);
+        @content;
+    }
+}
+
+@mixin icon-after($name) {
+    &::after {
+        @include icon-style($name);
+        @content;
+    }
+}
+
+@mixin icon-style($name) {
+    @each $icon in $icon {
+        $n: index($icon, $name);
+        @if $n != null {
+            @include  icon-content($icon);
+        }
+    }
+    font-family: 'icon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon-content($icon) {
+    content: nth($icon, 2);
+}

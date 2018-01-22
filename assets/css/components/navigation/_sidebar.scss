@@ -1,0 +1,76 @@
+.sidebar {
+    width: 200px;
+    height: 100%;
+    background: $white;
+}
+
+.logo {
+    text-transform: uppercase;
+    color: orange;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.sidebar-navigation {
+    margin: 0;
+    padding: 0;
+
+    li {
+        list-style-type: none;
+
+        a::before,
+        a::after {
+            transition: all .2s;
+        }
+
+        &:hover a,
+        &.active a {
+            color: $black;
+
+            &::after {
+                background-color: orange;
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: $boulder;
+        display: block;
+        position: relative;
+        padding: 20px 15px;
+        font-size: 12px;
+        line-height: normal;
+
+        &::before {
+            padding: 8px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        &::after {
+            display: block;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 3px;
+        }
+
+        span {
+            text-transform: uppercase;
+            margin-top: 3px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+    }
+
+    $menuItems: ("home", "charts", "edit");
+
+    @each $name in $menuItems {
+        .#{$name} a {
+            @include icon(#{$name});
+        }
+    }
+}
