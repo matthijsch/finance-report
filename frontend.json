@@ -31,10 +31,12 @@
             },
             {
                 "src": [
+                    "node_modules/jquery/dist/jquery.min.js",
+                    "node_modules/materialize-css/dist/js/materialize.js",
                     "assets/js/components/*.js",
                     "assets/js/*.js"
                 ],
-                "dest": "public/js",
+                "dest": "public/assets/js",
                 "outputname": "body.min.js"
             }
         ],

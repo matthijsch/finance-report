@@ -5,12 +5,17 @@
 
     <ul class="collection bankaccounts">
         {% for bankaccount in bankaccounts %}
-            <li class="collection-item bankaccount avatar editable">
+            <li class="collection-item bankaccount avatar">
                 <img src="" class="circle"/>
                 <span class="title">{{ bankaccount.company }}</span>
                 <p>
                     {{ bankaccount.category }}
-                 </p>
+                </p>
+                <div class="actions">
+                    <a href="{{ path('app_bankaccounts_update', {'id': bankaccount.id}) }}">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </div>
             </li>
         {% endfor %}
     </ul>

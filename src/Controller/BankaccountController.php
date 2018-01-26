@@ -11,6 +11,8 @@ namespace App\Controller;
 use App\Entity\Bankaccount;
 use App\Form\Type\BankaccountType;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +21,14 @@ use Twig_Environment;
 class BankaccountController
 {
     /**
-     * @var ManagerRegistry
+     * @var ObjectRepository
      */
-    private $managerRegistry;
+    private $bankaccountRepository;
+
+    /**
+     * @var ObjectManager
+     */
+    private $bankaccountManager;
 
     /**
      * @var Twig_Environment
@@ -46,8 +53,10 @@ class BankaccountController
         FormFactoryInterface $formFactory
     ) {
         $this->bankaccountRepository = $managerRegistry->getRepository(Bankaccount::class);
-        $this->twig                  = $twig;
-        $this->formFactory           = $formFactory;
+        $this->bankaccountManager = $managerRegistry->getManagerForClass(Bankaccount::class);
+
+        $this->twig        = $twig;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -77,6 +86,13 @@ class BankaccountController
     {
         $form = $this->formFactory->create(BankaccountType::class, $bankaccount);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $bankaccount = $form->getData();
+
+            $this->bankaccountManager->persist($bankaccount);
+            $this->bankaccountManager->flush();
+        }
 
         return new Response(
             $this->twig->render(

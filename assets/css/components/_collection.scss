@@ -1,16 +1,11 @@
 .collection {
     max-width: 500px;
-}
+    border: 0;
 
-.collection-item {
-    position: relative;
+    .collection-item {
+        position: relative;
+        border: 0;
+        margin-bottom: 12px;
 
-    &.editable {
-        @include icon(edit) {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            margin-top: -12px;
-        }
     }
 }

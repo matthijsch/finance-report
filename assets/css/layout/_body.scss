@@ -1,4 +1,9 @@
 .page-body {
     padding: 60px;
     flex-grow: 1;
+
+    &-block {
+        padding: 30px;
+        background-color: $white;
+    }
 }

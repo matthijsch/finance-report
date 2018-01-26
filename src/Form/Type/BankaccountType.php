@@ -31,22 +31,18 @@ class BankaccountType extends AbstractType
     {
         $builder
             ->add('company', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                ],
+                'disabled' => true,
             ])
             ->add('accountNumber', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                ],
+                'disabled' => true,
             ])
             ->add('category', ChoiceType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],
                 'choices' => [
-                    'supermarket',
-                    'clothing_store',
+                    'app.bankaccount.category.supermarket' => 'supermarket',
+                    'app.bankaccount.category.clothing_store' => 'clothing_store',
                 ],
             ])
             ;

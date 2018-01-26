@@ -1,0 +1,5 @@
+app:
+    bankaccount:
+        category:
+            supermarket: Supermarket
+            clothing_store: Clothing store

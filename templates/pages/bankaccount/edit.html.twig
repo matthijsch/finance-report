@@ -3,5 +3,10 @@
 {% block content %}
     <h1>Edit bankaccounts</h1>
 
-    {{ form(form) }}
+    <div class="page-body-block">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Save</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

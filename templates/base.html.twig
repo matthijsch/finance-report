@@ -8,6 +8,7 @@
         {% endblock %}
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         {% block body %}
@@ -19,6 +20,8 @@
             </div>
         {% endblock %}
 
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('assets/js/body.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
