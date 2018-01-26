@@ -1,14 +1,8 @@
 <?php
 
-/*
- * This file is part of the JMT catalog package.
- *
- * (c) Connect Holland.
- */
-
 namespace App\Form\Type;
 
-use App\Entity\Bankaccount;
+use App\Entity\MutationAccount;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,11 +11,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * CustomEventInformationType.
+ * MutationAccountType.
  *
- * @author Reyo Stallenberg <reyo@connectholland.nl>
+ * @author Matthijs Hasenpfliug <matthijs@connectholland.nl>
  */
-class BankaccountType extends AbstractType
+class MutationAccountType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -31,9 +25,6 @@ class BankaccountType extends AbstractType
     {
         $builder
             ->add('company', TextType::class, [
-                'disabled' => true,
-            ])
-            ->add('accountNumber', TextType::class, [
                 'disabled' => true,
             ])
             ->add('category', ChoiceType::class, [
@@ -54,7 +45,7 @@ class BankaccountType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Bankaccount::class,
+            'data_class' => MutationAccount::class,
         ]);
     }
 }

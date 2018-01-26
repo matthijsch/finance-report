@@ -1,17 +1,11 @@
 <?php
 
-/*
- * This file is part of the JMT catalog package.
- *
- * (c) Connect Holland.
- */
-
 namespace App\Entity;
 
 /**
- * Bankaccount.
+ * MutationAccount.
  */
-class Bankaccount
+class MutationAccount
 {
     /**
      * @var int
@@ -22,11 +16,6 @@ class Bankaccount
      * @var string
      */
     private $company;
-
-    /**
-     * @var string
-     */
-    private $accountNumber;
 
     /**
      * @var string
@@ -57,26 +46,6 @@ class Bankaccount
     public function setCompany($company): self
     {
         $this->company = $company;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Account Number.
-     */
-    public function getAccountNumber(): string
-    {
-        return $this->accountNumber;
-    }
-
-    /**
-     * Set the value of Account Number.
-     *
-     * @param string accountNumber
-     */
-    public function setAccountNumber($accountNumber): self
-    {
-        $this->accountNumber = $accountNumber;
 
         return $this;
     }

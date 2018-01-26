@@ -6,8 +6,12 @@ app_dashboard:
 
 app_bankaccounts_index:
     path: /bankaccounts
-    controller: App\Controller\BankaccountController::overviewAction
+    controller: App\Controller\BankaccountController::indexAction
 
 app_bankaccounts_update:
     path: /bankaccounts/{id}/update
     controller: App\Controller\BankaccountController::updateAction
+
+app_mutations_index:
+    path: /mutations
+    controller: App\Controller\MutationController::indexAction

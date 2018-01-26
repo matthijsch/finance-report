@@ -11,9 +11,9 @@ App\Entity\Mutation:
         date:
             type: datetime
     manyToOne:
-        bankaccount:
-            targetEntity: App\Entity\Bankaccount
+        mutationAccount:
+            targetEntity: App\Entity\MutationAccount
             cascade: ["persist"]
             joinColumn:
-                name: bankaccount_id
+                name: mutation_account_id
                 referencedColumnName: id

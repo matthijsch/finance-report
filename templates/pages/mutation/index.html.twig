@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Mutations</h1>
+
+    <div class="page-body-block">
+        <h2>Import mutations</h2>
+        
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Save</button>
+        {{ form_end(form) }}
+    </div>
+    </ul>
+{% endblock %}

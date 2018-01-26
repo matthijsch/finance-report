@@ -1,4 +1,4 @@
-App\Entity\Bankaccount:
+App\Entity\MutationAccount:
     type: entity
     id:
         id:
@@ -8,10 +8,6 @@ App\Entity\Bankaccount:
         company:
             type: string
             length: 100
-        accountNumber:
-            type: string
-            length: 100
-            column: account_number
         category:
             type: string
             length: 100

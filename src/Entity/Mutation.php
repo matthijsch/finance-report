@@ -1,11 +1,5 @@
 <?php
 
-/*
- * This file is part of the JMT catalog package.
- *
- * (c) Connect Holland.
- */
-
 namespace App\Entity;
 
 use DateTime;
@@ -31,9 +25,9 @@ class Mutation
     private $date;
 
     /**
-     * @var Bankaccount
+     * @var MutationAccount
      */
-    private $bankaccount;
+    private $mutationAccount;
 
     /**
      * Get the value of Id.
@@ -84,21 +78,21 @@ class Mutation
     }
 
     /**
-     * Get the value of Bankaccount.
+     * Get the value of MutationAccount.
      */
-    public function getBankaccount(): Bankaccount
+    public function getMutationAccount(): MutationAccount
     {
-        return $this->bankaccount;
+        return $this->mutationAccount;
     }
 
     /**
-     * Set the value of Bankaccount.
+     * Set the value of MutationAccount.
      *
-     * @param Bankaccount bankaccount
+     * @param MutationAccount mutationAccount
      */
-    public function setBankaccount(Bankaccount $bankaccount): self
+    public function setMutationAccount(MutationAccount $mutationAccount): self
     {
-        $this->bankaccount = $bankaccount;
+        $this->mutationAccount = $mutationAccount;
 
         return $this;
     }

@@ -11,7 +11,7 @@
             <a href="#"><span>Charts</span></a>
         </li>
         <li class="mutations">
-            <a href="#"><span>Mutations</span></a>
+            <a href="{{ path('app_mutations_index') }}"><span>Mutations</span></a>
         </li>
         <li class="edit{% if app.request.get('_route') == 'app_bankaccounts_index' %} active{% endif %}">
             <a href="{{ path('app_bankaccounts_index') }}"><span>Edit bankaccounts</span></a>

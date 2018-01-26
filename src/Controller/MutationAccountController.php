@@ -1,15 +1,9 @@
 <?php
 
-/*
- * This file is part of the JMT catalog package.
- *
- * (c) Connect Holland.
- */
-
 namespace App\Controller;
 
-use App\Entity\Bankaccount;
-use App\Form\Type\BankaccountType;
+use App\Entity\MutationAccount;
+use App\Form\Type\MutationAccountType;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -18,17 +12,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig_Environment;
 
-class BankaccountController
+class MutationAccountController
 {
     /**
      * @var ObjectRepository
      */
-    private $bankaccountRepository;
+    private $mutationAccountRepository;
 
     /**
      * @var ObjectManager
      */
-    private $bankaccountManager;
+    private $mutationAccountManager;
 
     /**
      * @var Twig_Environment
@@ -52,51 +46,51 @@ class BankaccountController
         Twig_Environment $twig,
         FormFactoryInterface $formFactory
     ) {
-        $this->bankaccountRepository = $managerRegistry->getRepository(Bankaccount::class);
-        $this->bankaccountManager = $managerRegistry->getManagerForClass(Bankaccount::class);
+        $this->mutationAccountRepository = $managerRegistry->getRepository(MutationAccount::class);
+        $this->mutationAccountManager = $managerRegistry->getManagerForClass(MutationAccount::class);
 
-        $this->twig        = $twig;
+        $this->twig = $twig;
         $this->formFactory = $formFactory;
     }
 
     /**
-     * Overview bankaccounts.
+     * Overview mutationAccounts.
      *
      * @param Request $request
      */
-    public function overviewAction(Request $request): Response
+    public function indexAction(Request $request): Response
     {
-        $bankaccounts = $this->bankaccountRepository->findAll();
+        $mutationAccounts = $this->mutationAccountRepository->findAll();
 
         return new Response(
             $this->twig->render(
-                'pages/bankaccount/index.html.twig',
-                ['bankaccounts' => $bankaccounts]
+                'pages/mutationAccount/index.html.twig',
+                ['mutationAccounts' => $mutationAccounts]
             )
         );
     }
 
     /**
-     * Update bankaccount.
+     * Update mutationAccount.
      *
-     * @param Bankaccount $bankaccount
-     * @param Request     $request
+     * @param MutationAccount $mutationAccount
+     * @param Request         $request
      */
-    public function updateAction(Bankaccount $bankaccount, Request $request): Response
+    public function updateAction(MutationAccount $mutationAccount, Request $request): Response
     {
-        $form = $this->formFactory->create(BankaccountType::class, $bankaccount);
+        $form = $this->formFactory->create(MutationAccountType::class, $mutationAccount);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bankaccount = $form->getData();
+            $mutationAccount = $form->getData();
 
-            $this->bankaccountManager->persist($bankaccount);
-            $this->bankaccountManager->flush();
+            $this->mutationAccountManager->persist($mutationAccount);
+            $this->mutationAccountManager->flush();
         }
 
         return new Response(
             $this->twig->render(
-                'pages/bankaccount/edit.html.twig',
+                'pages/mutationAccount/edit.html.twig',
                 ['form' => $form->createView()]
             )
         );
