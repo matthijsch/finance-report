@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
-use Doctrine\Common\Collections\Collection;
 
 class MutationImporter
 {
@@ -39,18 +38,19 @@ class MutationImporter
     public function import(UploadedFile $file)
     {
         $serializer = new Serializer(
-            [$this->mutationDenormalizer, new ArrayDenormalizer()],
+            [new ArrayDenormalizer(), $this->mutationDenormalizer],
             [new CsvEncoder()]
         );
 
         $fileContents = file_get_contents($file->getPathname());
         $mutations = $serializer->deserialize($fileContents, 'App\Entity\Mutation[]', 'csv');
 
-        if ($mutations instanceof Collection) {
-            foreach ($mutations as $mutation) {
+        foreach ($mutations as $mutation) {
+            if ($mutation instanceof Mutation) {
                 $this->mutationManager->persist($mutation);
             }
-            $this->mutationManager->flush();
         }
+
+        $this->mutationManager->flush();
     }
 }

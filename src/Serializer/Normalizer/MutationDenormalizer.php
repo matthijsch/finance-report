@@ -3,7 +3,6 @@
 namespace App\Serializer\Normalizer;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use DateTime;
 use App\Entity\Mutation;
 use App\Entity\MutationAccount;
@@ -24,6 +23,7 @@ class MutationDenormalizer implements DenormalizerInterface
      */
     public function __construct(ManagerRegistry $managerRegistry)
     {
+        $this->mutationRepository = $managerRegistry->getRepository(Mutation::class);
         $this->mutationAccountRepository = $managerRegistry->getRepository(MutationAccount::class);
     }
 
@@ -35,39 +35,32 @@ class MutationDenormalizer implements DenormalizerInterface
      * @param string $format  Format the given data was extracted from
      * @param array  $context Options available to the denormalizer
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = []): Mutation
     {
-        $mutations = new ArrayCollection();
-        $mutationAccounts = [];
+        $id = $this->denormalizeId($data);
 
-        foreach ($data as $mutationArray) {
-            $company = $mutationArray['Naam / Omschrijving'];
+        $mutation = $this->mutationRepository->findOneBy(['id' => $id]);
 
-            if (isset($mutationAccounts[$company])) {
-                $mutationAccount = $mutationAccounts[$company];
-            } else {
-                $mutationAccount = $this->mutationAccountRepository->findOneBy([
-                    'company' => $company,
-                ]);
-
-                if (!$mutationAccount instanceof MutationAccount) {
-                    $mutationAccount = new MutationAccount();
-                    $mutationAccount->setCompany($mutationArray['Naam / Omschrijving']);
-                    $mutationAccount->setCategory('other');
-                }
-
-                $mutationAccounts[$company] = $mutationAccount;
-            }
-
+        if (!$mutation instanceof Mutation) {
             $mutation = new Mutation();
-            $mutation->setAmount(preg_replace('/[^\d]/', '', $mutationArray['Bedrag (EUR)']));
-            $mutation->setDate(DateTime::createFromFormat('Ymd', $mutationArray['Datum']));
-            $mutation->setMutationAccount($mutationAccount);
-
-            $mutations->add($mutation);
+            $mutation->setId($id);
         }
 
-        return $mutations;
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'Bedrag (EUR)':
+                    $mutation->setAmount($this->denormalizeAmount($value, $data['Af Bij']));
+                    break;
+                case 'Datum':
+                    $mutation->setDate($this->denormalizeDate($value));
+                    break;
+                case 'Naam / Omschrijving':
+                    $mutation->setMutationAccount($this->denormalizeCompany($value));
+                    break;
+            }
+        }
+
+        return $mutation;
     }
 
     /**
@@ -80,5 +73,70 @@ class MutationDenormalizer implements DenormalizerInterface
     public function supportsDenormalization($data, $type, $format = null): bool
     {
         return is_array($data);
+    }
+
+    /**
+     * Denormalize id.
+     *
+     * @param array $data
+     */
+    private function denormalizeId(array $data): string
+    {
+        return md5(implode('', $data));
+    }
+
+    /**
+     * Denormalize amount.
+     *
+     * @param string $amount
+     * @param string $substractOrAdd
+     */
+    private function denormalizeAmount(string $amount, string $substractOrAdd): int
+    {
+        $amount = preg_replace('/[^\d]/', '', $amount);
+
+        if ('Af' === $substractOrAdd) {
+            return $amount * -1;
+        }
+
+        return $amount;
+    }
+
+    /**
+     * Denormalize date.
+     *
+     * @param string $date
+     */
+    private function denormalizeDate(string $date): DateTime
+    {
+        return DateTime::createFromFormat('Ymd', $date);
+    }
+
+    /**
+     * Denormalize company.
+     *
+     * @param string $company
+     */
+    private function denormalizeCompany(string $company): MutationAccount
+    {
+        static $mutationAccounts = [];
+
+        if (isset($mutationAccounts[$company])) {
+            $mutationAccount = $mutationAccounts[$company];
+        } else {
+            $mutationAccount = $this->mutationAccountRepository->findOneBy([
+                'company' => $company,
+            ]);
+
+            if (!$mutationAccount instanceof MutationAccount) {
+                $mutationAccount = new MutationAccount();
+                $mutationAccount->setCompany($company);
+                $mutationAccount->setCategory('other');
+            }
+
+            $mutationAccounts[$company] = $mutationAccount;
+        }
+
+        return $mutationAccount;
     }
 }

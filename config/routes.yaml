@@ -4,14 +4,14 @@ app_dashboard:
     defaults:
         template: pages/dashboard.html.twig
 
-app_bankaccounts_index:
+app_mutation_account_index:
     path: /bankaccounts
-    controller: App\Controller\BankaccountController::indexAction
+    controller: App\Controller\MutationAccountController::indexAction
 
-app_bankaccounts_update:
+app_mutation_account_update:
     path: /bankaccounts/{id}/update
-    controller: App\Controller\BankaccountController::updateAction
+    controller: App\Controller\MutationAccountController::updateAction
 
-app_mutations_index:
+app_mutation_index:
     path: /mutations
     controller: App\Controller\MutationController::indexAction

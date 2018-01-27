@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Bankaccounts</h1>
+
+    <ul class="collection mutationAccounts">
+        {% for mutationAccount in mutationAccounts %}
+            <li class="collection-item mutation-account avatar">
+                <img src="" class="circle"/>
+                <span class="title">{{ mutationAccount.company }}</span>
+                <p>
+                    {{ mutationAccount.category }}
+                </p>
+                <div class="actions">
+                    <a href="{{ path('app_mutation_account_update', {'id': mutationAccount.id}) }}">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

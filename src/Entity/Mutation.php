@@ -10,7 +10,7 @@ use DateTime;
 class Mutation
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -32,9 +32,21 @@ class Mutation
     /**
      * Get the value of Id.
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * Set the value of Id.
+     *
+     * @param string $id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

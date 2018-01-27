@@ -23,6 +23,11 @@ class MutationAccount
     private $category;
 
     /**
+     * @var string
+     */
+    private $image;
+
+    /**
      * Get the value of Id.
      */
     public function getId()
@@ -43,7 +48,7 @@ class MutationAccount
      *
      * @param string company
      */
-    public function setCompany($company): self
+    public function setCompany(string $company): self
     {
         $this->company = $company;
 
@@ -63,9 +68,29 @@ class MutationAccount
      *
      * @param string category
      */
-    public function setCategory($category): self
+    public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Image.
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of Image.
+     *
+     * @param string image
+     */
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

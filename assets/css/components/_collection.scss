@@ -1,11 +1,15 @@
 .collection {
-    max-width: 500px;
+    padding: 20px;
     border: 0;
+    display: flex;
+    flex-wrap: wrap;
 
     .collection-item {
         position: relative;
         border: 0;
         margin-bottom: 12px;
-
+        flex: 1;
+        margin: 0 10px 20px;
+        min-width: 300px;
     }
 }

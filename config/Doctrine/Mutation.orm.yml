@@ -2,8 +2,8 @@ App\Entity\Mutation:
     type: entity
     id:
         id:
-            type: integer
-            generator: { strategy: AUTO }
+            type: string
+            length: 255
     fields:
         amount:
             type: integer

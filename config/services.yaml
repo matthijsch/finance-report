@@ -14,3 +14,8 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\EventSubscriber\GoogleImageSubscriber:
+        arguments: ['%kernel.project_dir%/public/logo']
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

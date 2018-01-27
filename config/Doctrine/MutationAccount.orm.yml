@@ -11,3 +11,7 @@ App\Entity\MutationAccount:
         category:
             type: string
             length: 100
+        image:
+            type: string
+            length: 255
+            nullable: true
